@@ -21,7 +21,11 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocument
         
         let vc = PDFViewController()
         vc.modalPresentationStyle = .fullScreen
+<<<<<<< HEAD
         vc.setURL(at: sourceURL)
+=======
+        vc.getURL(at: sourceURL)
+>>>>>>> 08b8d36a6501214cb1d908c26971cde23aaf524d
         
         present(vc, animated: true, completion: nil)
         

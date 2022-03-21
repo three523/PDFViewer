@@ -30,7 +30,7 @@ class PDFViewController: UIViewController {
         let pdfView = PDFView(frame: view.bounds)
 
         view.addSubview(pdfView)
-        view.addSubview(backBtn)     
+        view.addSubview(backBtn)
         
         guard let pdfURL = pdfURL else {
             return

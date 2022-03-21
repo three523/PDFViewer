@@ -37,9 +37,7 @@ class ViewController: UIViewController {
     }()
     
     var pdfURL: URL?
-    
     var task: URLSessionDownloadTask? = nil
-    
     let fileManager = FileManager.default
 
     override func viewDidLoad() {
@@ -68,6 +66,7 @@ class ViewController: UIViewController {
         
         guard let url = URL(string: "https://www.tutorialspoint.com/swift/swift_tutorial.pdf") else { return }
         let urlSession = URLSession(configuration: .default, delegate: self, delegateQueue: nil)
+
         task = urlSession.downloadTask(with: url)
         task?.resume()
         
@@ -80,6 +79,7 @@ class ViewController: UIViewController {
             return
         }
         vc.setURL(at: pdfURL)
+
         vc.modalPresentationStyle = .fullScreen
         self.present(vc, animated: true, completion: nil)
     }
