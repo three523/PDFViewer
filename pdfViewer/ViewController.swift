@@ -6,12 +6,28 @@
 //
 
 import UIKit
+import WeScan_English
+import PDFKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, ImageScannerControllerDelegate {
     
-    let downloadLink: UIButton = {
+    func imageScannerController(_ scanner: ImageScannerController, didFinishScanningWithResults results: ImageScannerResults) {
+        createPDF(Image: results.croppedScan.image)
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func imageScannerControllerDidCancel(_ scanner: ImageScannerController) {
+        scanner.dismiss(animated: true, completion: nil)
+    }
+    
+    func imageScannerController(_ scanner: ImageScannerController, didFailWithError error: Error) {
+        print(error)
+    }
+    
+    
+    let scanVCBtn: UIButton = {
         let btn = UIButton()
-        btn.setTitle("download PDF", for: .normal)
+        btn.setTitle("Scan", for: .normal)
         btn.setTitleColor(.blue, for: .normal)
         btn.setTitleColor(.gray, for: .highlighted)
         btn.sizeToFit()
@@ -36,19 +52,18 @@ class ViewController: UIViewController {
         return btn
     }()
     
-    var pdfURL: URL?
-    var task: URLSessionDownloadTask? = nil
     let fileManager = FileManager.default
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .white
         
-        downloadLink.translatesAutoresizingMaskIntoConstraints = true
-        downloadLink.center = view.center
-        downloadLink.addTarget(self, action: #selector(downloadPdf), for: .touchUpInside)
+        scanVCBtn.translatesAutoresizingMaskIntoConstraints = true
+        scanVCBtn.center = view.center
+        scanVCBtn.addTarget(self, action: #selector(scanBtnClick), for: .touchUpInside)
         
         nextControllerBtn.center = view.center
-        nextControllerBtn.center.y = downloadLink.center.y + downloadLink.bounds.height
+        nextControllerBtn.center.y = scanVCBtn.center.y + scanVCBtn.bounds.height
         nextControllerBtn.addTarget(self, action: #selector(presentPDFViewer), for: .touchUpInside)
         
         activityVCBtn.center = view.center
@@ -56,29 +71,22 @@ class ViewController: UIViewController {
         activityVCBtn.addTarget(self, action: #selector(presentActivityVC), for: .touchUpInside)
         
         
-        view.addSubview(downloadLink)
+        view.addSubview(scanVCBtn)
         view.addSubview(nextControllerBtn)
         view.addSubview(activityVCBtn)
     }
     
     @objc
-    func downloadPdf() {
-        
-        guard let url = URL(string: "https://www.tutorialspoint.com/swift/swift_tutorial.pdf") else { return }
-        let urlSession = URLSession(configuration: .default, delegate: self, delegateQueue: nil)
-
-        task = urlSession.downloadTask(with: url)
-        task?.resume()
+    func scanBtnClick() {
+        let scanVC = ImageScannerController()
+        scanVC.imageScannerDelegate = self
+        present(scanVC, animated: true, completion: nil)
         
     }
     
     @objc
     func presentPDFViewer() {
         let vc = PDFViewController()
-        guard let pdfURL = pdfURL else {
-            return
-        }
-        vc.setURL(at: pdfURL)
 
         vc.modalPresentationStyle = .fullScreen
         self.present(vc, animated: true, completion: nil)
@@ -95,46 +103,20 @@ class ViewController: UIViewController {
         
     }
     
-    private func fileDownLoad(url: URL) {
+    func createPDF(Image: UIImage) {
+        let pdfDocument = PDFDocument()
+        let pdfPage = PDFPage(image: Image)!
+        pdfDocument.insert(pdfPage, at: 0)
         
-        let destinationURL = localFilePath(path: url.path)
-                
+        let data = pdfDocument.dataRepresentation()
+        let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        let docURL = documentDirectory.appendingPathComponent("myFileName.pdf")
+        
         do {
-            try fileManager.moveItem(at: url, to: destinationURL)
-        } catch {
-            print("Could not copy file to disk: \(error.localizedDescription)")
+            try data?.write(to: docURL)
+        } catch (let error) {
+            print(error.localizedDescription)
         }
-        
-        pdfURL = destinationURL
-    }
-    
-    private func localFilePath(path: String) -> URL {
-        let documentsURL = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("DH",
-        isDirectory: true)
-        if !fileManager.fileExists(atPath: documentsURL.path) {
-            
-            do {
-                try fileManager.createDirectory(atPath: documentsURL.path, withIntermediateDirectories: true, attributes: nil)
-            } catch {
-                NSLog("Coludn't create document directory")
-            }
-        }
-        
-        guard let fileName = task?.originalRequest?.url?.lastPathComponent else {
-            return documentsURL.appendingPathComponent((path as NSString).lastPathComponent)
-        }
-                
-        let destinationURL = documentsURL.appendingPathComponent(fileName)
-        
-        return destinationURL
-    }
-}
-
-extension ViewController: URLSessionDownloadDelegate {
-    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
-        print("downloadLocation:", location)
-        
-        fileDownLoad(url: location)
     }
 }
 
