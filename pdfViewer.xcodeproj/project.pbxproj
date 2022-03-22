@@ -10,11 +10,11 @@
 		189641E127BA374E00CCA248 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189641E027BA374E00CCA248 /* AppDelegate.swift */; };
 		189641E327BA374E00CCA248 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189641E227BA374E00CCA248 /* SceneDelegate.swift */; };
 		189641E527BA374E00CCA248 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189641E427BA374E00CCA248 /* ViewController.swift */; };
-		189641E827BA374E00CCA248 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 189641E627BA374E00CCA248 /* Main.storyboard */; };
 		189641EA27BA375000CCA248 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 189641E927BA375000CCA248 /* Assets.xcassets */; };
 		189641ED27BA375000CCA248 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 189641EB27BA375000CCA248 /* LaunchScreen.storyboard */; };
 		189641F527BA61E200CCA248 /* PDFViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189641F427BA61E200CCA248 /* PDFViewController.swift */; };
 		189C7AEA27BB8AD60052A8B4 /* DocumentBrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189C7AE927BB8AD60052A8B4 /* DocumentBrowserViewController.swift */; };
+		3E18ED0392D001A973B7B369 /* libPods-pdfViewer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ACC0E679F160EE515277DD96 /* libPods-pdfViewer.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,12 +22,14 @@
 		189641E027BA374E00CCA248 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		189641E227BA374E00CCA248 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		189641E427BA374E00CCA248 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		189641E727BA374E00CCA248 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		189641E927BA375000CCA248 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		189641EC27BA375000CCA248 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		189641EE27BA375000CCA248 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		189641F427BA61E200CCA248 /* PDFViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFViewController.swift; sourceTree = "<group>"; };
 		189C7AE927BB8AD60052A8B4 /* DocumentBrowserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentBrowserViewController.swift; sourceTree = "<group>"; };
+		7330E28B21AA129CB64A6188 /* Pods-pdfViewer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pdfViewer.release.xcconfig"; path = "Target Support Files/Pods-pdfViewer/Pods-pdfViewer.release.xcconfig"; sourceTree = "<group>"; };
+		ACC0E679F160EE515277DD96 /* libPods-pdfViewer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-pdfViewer.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BD9E2E1C8B63E0223A07EE5C /* Pods-pdfViewer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pdfViewer.debug.xcconfig"; path = "Target Support Files/Pods-pdfViewer/Pods-pdfViewer.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,6 +37,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3E18ED0392D001A973B7B369 /* libPods-pdfViewer.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -46,6 +49,8 @@
 			children = (
 				189641DF27BA374E00CCA248 /* pdfViewer */,
 				189641DE27BA374E00CCA248 /* Products */,
+				3CACCA85B7B18E64819D03B3 /* Pods */,
+				86C674ACB275A401FEAE67B1 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -65,12 +70,29 @@
 				189641E427BA374E00CCA248 /* ViewController.swift */,
 				189641F427BA61E200CCA248 /* PDFViewController.swift */,
 				189C7AE927BB8AD60052A8B4 /* DocumentBrowserViewController.swift */,
-				189641E627BA374E00CCA248 /* Main.storyboard */,
 				189641E927BA375000CCA248 /* Assets.xcassets */,
 				189641EB27BA375000CCA248 /* LaunchScreen.storyboard */,
 				189641EE27BA375000CCA248 /* Info.plist */,
 			);
 			path = pdfViewer;
+			sourceTree = "<group>";
+		};
+		3CACCA85B7B18E64819D03B3 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				BD9E2E1C8B63E0223A07EE5C /* Pods-pdfViewer.debug.xcconfig */,
+				7330E28B21AA129CB64A6188 /* Pods-pdfViewer.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		86C674ACB275A401FEAE67B1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				ACC0E679F160EE515277DD96 /* libPods-pdfViewer.a */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -80,9 +102,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 189641F127BA375000CCA248 /* Build configuration list for PBXNativeTarget "pdfViewer" */;
 			buildPhases = (
+				8F31241A49E0A27B87CA3C75 /* [CP] Check Pods Manifest.lock */,
 				189641D927BA374E00CCA248 /* Sources */,
 				189641DA27BA374E00CCA248 /* Frameworks */,
 				189641DB27BA374E00CCA248 /* Resources */,
+				AA82E82737D77465D9F132B2 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -133,11 +157,52 @@
 			files = (
 				189641ED27BA375000CCA248 /* LaunchScreen.storyboard in Resources */,
 				189641EA27BA375000CCA248 /* Assets.xcassets in Resources */,
-				189641E827BA374E00CCA248 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		8F31241A49E0A27B87CA3C75 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-pdfViewer-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AA82E82737D77465D9F132B2 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-pdfViewer/Pods-pdfViewer-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-pdfViewer/Pods-pdfViewer-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-pdfViewer/Pods-pdfViewer-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		189641D927BA374E00CCA248 /* Sources */ = {
@@ -155,14 +220,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		189641E627BA374E00CCA248 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				189641E727BA374E00CCA248 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		189641EB27BA375000CCA248 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -292,6 +349,7 @@
 		};
 		189641F227BA375000CCA248 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BD9E2E1C8B63E0223A07EE5C /* Pods-pdfViewer.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -302,7 +360,6 @@
 				INFOPLIST_FILE = pdfViewer/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
@@ -321,6 +378,7 @@
 		};
 		189641F327BA375000CCA248 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7330E28B21AA129CB64A6188 /* Pods-pdfViewer.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -331,7 +389,6 @@
 				INFOPLIST_FILE = pdfViewer/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;

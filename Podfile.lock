@@ -1,0 +1,16 @@
+PODS:
+  - WeScan-English (1.8.2)
+
+DEPENDENCIES:
+  - WeScan-English (~> 1.8.2)
+
+SPEC REPOS:
+  trunk:
+    - WeScan-English
+
+SPEC CHECKSUMS:
+  WeScan-English: 64d182cdf19eac44ad36cc2603832fb511ae57df
+
+PODFILE CHECKSUM: 66bc7e942095c4d3b3e03de61070dd693359a6de
+
+COCOAPODS: 1.11.3
