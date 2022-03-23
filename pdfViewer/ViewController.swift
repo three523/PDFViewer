@@ -13,6 +13,7 @@ class ViewController: UIViewController, ImageScannerControllerDelegate {
     
     func imageScannerController(_ scanner: ImageScannerController, didFinishScanningWithResults results: ImageScannerResults) {
         createPDF(Image: results.croppedScan.image)
+        print(results.croppedScan.image)
         dismiss(animated: true, completion: nil)
     }
     
@@ -104,13 +105,23 @@ class ViewController: UIViewController, ImageScannerControllerDelegate {
     }
     
     func createPDF(Image: UIImage) {
+        let defalutName = "sample"
+        var number: Int = 1
+        
         let pdfDocument = PDFDocument()
         let pdfPage = PDFPage(image: Image)!
         pdfDocument.insert(pdfPage, at: 0)
         
         let data = pdfDocument.dataRepresentation()
         let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-        let docURL = documentDirectory.appendingPathComponent("myFileName.pdf")
+        var docURL = documentDirectory.appendingPathComponent(defalutName + String(number))
+        var path = docURL.path
+        
+        while !fileManager.fileExists(atPath: path) {
+            number += 1
+            docURL = documentDirectory.appendingPathComponent(defalutName + String(number))
+            path = docURL.path
+        }
         
         do {
             try data?.write(to: docURL)
