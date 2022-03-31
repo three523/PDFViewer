@@ -8,13 +8,27 @@
 import UIKit
 import WeScan_English
 import PDFKit
+import UniformTypeIdentifiers
 
-class ViewController: UIViewController, ImageScannerControllerDelegate {
+
+
+class ViewController: UIViewController, ImageScannerControllerDelegate, UIDocumentPickerDelegate, PickerViewDelegate {
+    func dismissPickerViewController(url: URL) {
+        self.pdfURL = url
+        presentPDFViewer()
+    }
+    
+    var document: UIDocument?
+    var pdfURL: URL?
     
     func imageScannerController(_ scanner: ImageScannerController, didFinishScanningWithResults results: ImageScannerResults) {
         createPDF(Image: results.croppedScan.image)
         print(results.croppedScan.image)
         dismiss(animated: true, completion: nil)
+    }
+    
+    func pdfSetting(url: URL) {
+        self.pdfURL = url
     }
     
     func imageScannerControllerDidCancel(_ scanner: ImageScannerController) {
@@ -77,6 +91,14 @@ class ViewController: UIViewController, ImageScannerControllerDelegate {
         view.addSubview(activityVCBtn)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        document?.open(completionHandler: { (success) in
+            print(success)
+        })
+    }
+        
     @objc
     func scanBtnClick() {
         let scanVC = ImageScannerController()
@@ -88,25 +110,25 @@ class ViewController: UIViewController, ImageScannerControllerDelegate {
     @objc
     func presentPDFViewer() {
         let vc = PDFViewController()
-
         vc.modalPresentationStyle = .fullScreen
+        vc.pdfURL = pdfURL
         self.present(vc, animated: true, completion: nil)
     }
     
     @objc
     func presentActivityVC() {
         
-        let vc = DocumentBrowserViewController(forOpeningFilesWithContentTypes: ["public.composite-content"])
-
-        vc.allowsDocumentCreation = true
-        vc.allowsPickingMultipleItems = false
+        let vc = DocumentPickerViewController(forOpeningContentTypes: [UTType.pdf], asCopy: false)
+        vc.delegate = self
+        vc.pdfDelegate = self
+        vc.modalPresentationStyle = .formSheet
+        
         self.present(vc, animated: true, completion: nil)
         
     }
     
     func createPDF(Image: UIImage) {
-        let defalutName = "sample"
-        var number: Int = 1
+        let defalutName = UUID().uuidString
         
         let pdfDocument = PDFDocument()
         let pdfPage = PDFPage(image: Image)!
@@ -114,14 +136,8 @@ class ViewController: UIViewController, ImageScannerControllerDelegate {
         
         let data = pdfDocument.dataRepresentation()
         let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-        var docURL = documentDirectory.appendingPathComponent(defalutName + String(number))
-        var path = docURL.path
-        
-        while !fileManager.fileExists(atPath: path) {
-            number += 1
-            docURL = documentDirectory.appendingPathComponent(defalutName + String(number))
-            path = docURL.path
-        }
+        let docURL = documentDirectory.appendingPathComponent(defalutName)
+        let path = docURL.path
         
         do {
             try data?.write(to: docURL)

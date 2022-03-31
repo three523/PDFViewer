@@ -10,6 +10,7 @@
 			<key>LSItemContentTypes</key>
 			<array>
 				<string>public.data</string>
+                <string>com.adobe.pdf</string>
 			</array>
 			<key>CFBundleTypeName</key>
 			<string></string>
