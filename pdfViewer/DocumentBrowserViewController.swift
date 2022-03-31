@@ -7,7 +7,13 @@
 
 import UIKit
 
-class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocumentBrowserViewControllerDelegate {
+protocol PickerViewDelegate {
+    func dismissPickerViewController(url: URL)
+}
+
+class DocumentPickerViewController: UIDocumentPickerViewController, UIDocumentPickerDelegate {
+    
+    var pdfDelegate: PickerViewDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -16,15 +22,10 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocument
 
     }
     
-    func documentBrowser(_ controller: UIDocumentBrowserViewController, didPickDocumentsAt documentURLs: [URL]) {
-        guard let sourceURL = documentURLs.first else { return }
-        
-        let vc = PDFViewController()
-        vc.modalPresentationStyle = .fullScreen
-        vc.setURL(at: sourceURL)
-        
-        present(vc, animated: true, completion: nil)
-        
+    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
+        print(urls)
+        pdfDelegate?.dismissPickerViewController(url: urls.first!)
+        dismiss(animated: true)
     }
 
 }
